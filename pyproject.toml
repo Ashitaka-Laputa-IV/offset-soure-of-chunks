@@ -1,0 +1,19 @@
+[project]
+name = "offset-soure-of-chunks"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Ashitaka-Laputa-IV", email = "Ashitaka-Laputa-IV@outlook.com" }
+]
+requires-python = ">=3.13"
+dependencies = []
+
+[project.scripts]
+offset-soure-of-chunks = "offset_soure_of_chunks:main"
+chunk = "offset_soure_of_chunks.chunker:cli"
+serve = "offset_soure_of_chunks.server:main"
+
+[build-system]
+requires = ["uv_build>=0.12.23,<0.13.0"]
+build-backend = "uv_build"

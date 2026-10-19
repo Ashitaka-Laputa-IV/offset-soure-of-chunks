@@ -1,0 +1,6 @@
+data/eval
+langchain-docs
+data/chunks/
+node_modules/
+__pycache__/
+*.pyc
