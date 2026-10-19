@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>源文件定位 · offset-source-of-chunks</title>
+    <link rel="stylesheet" href="./base.css" />
+    <style>
+      .view-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 6px 16px;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--border);
+        background: var(--panel);
+        font-size: 12px;
+      }
+
+      #view-title {
+        color: var(--text);
+        font-family: var(--mono);
+        word-break: break-all;
+      }
+
+      #view-meta {
+        color: var(--muted);
+        font-family: var(--mono);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>源文件定位</h1>
+      <nav>
+        <a href="./article.html">← 返回文章</a>
+        <a href="./index.html">chunk 列表</a>
+      </nav>
+    </header>
+    <div class="view-head">
+      <span id="view-title">加载中…</span>
+      <span id="view-meta"></span>
+    </div>
+    <div id="source" class="source"></div>
+    <script type="module" src="./dist/source.js"></script>
+  </body>
+</html>

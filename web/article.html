@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>引用式文章 · offset-source-of-chunks</title>
+    <link rel="stylesheet" href="./base.css" />
+    <style>
+      header nav a {
+        color: var(--text);
+      }
+
+      .paper {
+        flex: 1;
+        width: 100%;
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 48px 28px 120px;
+        overflow-y: auto;
+      }
+
+      #article {
+        font-family: "Noto Serif SC", "Songti SC", "Source Han Serif SC", Georgia, serif;
+        font-size: 16px;
+        line-height: 1.9;
+      }
+
+      #article > h1 {
+        margin: 0 0 8px;
+        font-size: 30px;
+        line-height: 1.35;
+        letter-spacing: 0.5px;
+      }
+
+      #article h2 {
+        margin: 44px 0 12px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--border);
+        font-size: 20px;
+        line-height: 1.4;
+      }
+
+      #article p {
+        margin: 12px 0;
+        text-align: justify;
+      }
+
+      #article blockquote {
+        margin: 18px 0 26px;
+        padding: 10px 16px;
+        border-left: 3px solid var(--accent);
+        background: var(--panel);
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      #article blockquote p {
+        margin: 0;
+      }
+
+      #article ul {
+        padding-left: 24px;
+      }
+
+      #article code {
+        padding: 1px 5px;
+        border-radius: 4px;
+        background: var(--panel-2);
+        font-family: var(--mono);
+        font-size: 0.86em;
+      }
+
+      #article pre {
+        overflow: auto;
+        padding: 14px 16px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--panel);
+        font-size: 13px;
+        line-height: 1.65;
+      }
+
+      #article pre code {
+        padding: 0;
+        background: none;
+        font-size: inherit;
+      }
+
+      #article table {
+        width: 100%;
+        margin: 18px 0;
+        border-collapse: collapse;
+        font-family: var(--sans);
+        font-size: 13.5px;
+      }
+
+      #article th,
+      #article td {
+        padding: 8px 10px;
+        border: 1px solid var(--border);
+        text-align: left;
+      }
+
+      #article th {
+        background: var(--panel);
+      }
+
+      a.cite {
+        margin: 0 1px;
+        color: var(--accent);
+        font-family: var(--mono);
+        font-size: 0.76em;
+        text-decoration: none;
+        vertical-align: super;
+      }
+
+      a.cite:hover {
+        text-decoration: underline;
+      }
+
+      .refs {
+        margin-top: 56px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+      }
+
+      .refs-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 10px 16px;
+        margin-bottom: 12px;
+      }
+
+      .refs-head h2 {
+        margin: 0;
+        font-size: 16px;
+      }
+
+      .refs-head .meta {
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      .refs-actions {
+        display: flex;
+        gap: 8px;
+        margin-left: auto;
+      }
+
+      .refs-actions button {
+        padding: 4px 10px;
+        border: 1px solid var(--border);
+        border-radius: 5px;
+        background: var(--panel-2);
+        color: var(--muted);
+        font-size: 12px;
+        cursor: pointer;
+      }
+
+      .refs-actions button:hover {
+        border-color: var(--accent);
+        color: var(--text);
+      }
+
+      details.ref {
+        margin-bottom: 8px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--panel);
+      }
+
+      details.ref summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px 10px;
+        padding: 10px 12px;
+        color: var(--muted);
+        font-family: var(--mono);
+        font-size: 12px;
+        cursor: pointer;
+        list-style: none;
+      }
+
+      details.ref summary::-webkit-details-marker {
+        display: none;
+      }
+
+      details.ref summary::before {
+        content: "▸";
+        color: var(--accent);
+      }
+
+      details.ref[open] summary::before {
+        content: "▾";
+      }
+
+      details.ref .ref-n {
+        color: var(--accent);
+      }
+
+      details.ref .ref-body {
+        padding: 0 12px 12px;
+      }
+
+      details.ref .jump {
+        display: inline-block;
+        margin-bottom: 8px;
+        font-family: var(--sans);
+        font-size: 12px;
+        text-decoration: none;
+      }
+
+      details.ref .jump:hover {
+        text-decoration: underline;
+      }
+
+      details.ref pre {
+        max-height: 320px;
+        margin: 0;
+        overflow: auto;
+        padding: 10px 12px;
+        border-radius: 6px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>引用式文章示例</h1>
+      <span id="stats" class="meta">加载中…</span>
+      <nav>
+        <a href="./index.html">chunk 列表</a>
+      </nav>
+    </header>
+    <main class="paper">
+      <article id="article">
+        <p class="hint">加载中…若失败，请先运行 <code>uv run chunk</code> 与 <code>uv run article</code>。</p>
+      </article>
+      <section class="refs">
+        <div class="refs-head">
+          <h2>参考文献 · 被引用的 chunk</h2>
+          <span class="meta">默认折叠，点击编号可在原文件中定位</span>
+          <div class="refs-actions">
+            <button id="expand-all" type="button">全部展开</button>
+            <button id="collapse-all" type="button">全部折叠</button>
+          </div>
+        </div>
+        <div id="references"></div>
+      </section>
+    </main>
+    <script type="module" src="./dist/article.js"></script>
+  </body>
+</html>

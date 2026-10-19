@@ -7,11 +7,14 @@ authors = [
     { name = "Ashitaka-Laputa-IV", email = "Ashitaka-Laputa-IV@outlook.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "markdown>=3.11.1",
+]
 
 [project.scripts]
 offset-soure-of-chunks = "offset_soure_of_chunks:main"
 chunk = "offset_soure_of_chunks.chunker:cli"
+article = "offset_soure_of_chunks.article:cli"
 serve = "offset_soure_of_chunks.server:main"
 
 [build-system]

@@ -1,0 +1,106 @@
+{
+  "1": {
+    "source": "data/langchain-docs/oss/python/langchain/overview.md",
+    "quote": "Agent = Model + Harness."
+  },
+  "2": {
+    "source": "data/langchain-docs/oss/python/concepts/products.md",
+    "quote": "LangChain maintains several open source packages to help you build agents. Each serves a different purpose in the agent development stack."
+  },
+  "3": {
+    "source": "data/langchain-docs/oss/python/langgraph/overview.md",
+    "quote": "LangGraph is a low-level orchestration framework and runtime for building, managing, and deploying long-running, stateful agents."
+  },
+  "4": {
+    "source": "data/langchain-docs/oss/python/deepagents/overview.md",
+    "quote": "Deep Agents is the easiest way to start building agents and applications that are powered by LLMs—with built-in capabilities for file systems for context management, subagent-spawning, and long-term memory."
+  },
+  "5": {
+    "source": "data/langchain-docs/oss/python/langchain/agents.md",
+    "quote": "An agent is a model calling tools in a loop until a given task is complete."
+  },
+  "6": {
+    "source": "data/langchain-docs/oss/python/langchain/agents.md",
+    "quote": "A harness is everything around that loop: the prompt, the tools, and any middleware that shapes the model's behavior."
+  },
+  "7": {
+    "source": "data/langchain-docs/oss/python/langchain/tools.md",
+    "quote": "letting them fetch real-time data, execute code, query external databases, and take actions in the world."
+  },
+  "8": {
+    "source": "data/langchain-docs/oss/python/langchain/tools.md",
+    "quote": "By default, the function's docstring becomes the tool's description that helps the model understand when to use it"
+  },
+  "9": {
+    "source": "data/langchain-docs/oss/python/langchain/tools.md",
+    "quote": "Type hints are **required** as they define the tool's input schema."
+  },
+  "10": {
+    "source": "data/langchain-docs/oss/python/langchain/context-engineering.md",
+    "quote": "More often than not - it's actually the second reason that causes agents to not be reliable."
+  },
+  "11": {
+    "source": "data/langchain-docs/oss/python/langchain/context-engineering.md",
+    "quote": "**Context engineering** is providing the right information and tools in the right format so the LLM can accomplish a task."
+  },
+  "12": {
+    "source": "data/langchain-docs/oss/python/langchain/short-term-memory.md",
+    "quote": "Short term memory lets your application remember previous interactions within a single thread or conversation."
+  },
+  "13": {
+    "source": "data/langchain-docs/oss/python/langchain/long-term-memory.md",
+    "quote": "Long-term memory lets your agent store and recall information across different conversations and sessions."
+  },
+  "14": {
+    "source": "data/langchain-docs/oss/python/langchain/middleware/overview.md",
+    "quote": "Middleware provides a way to more tightly control what happens inside the agent."
+  },
+  "15": {
+    "source": "data/langchain-docs/oss/python/langchain/human-in-the-loop.md",
+    "quote": "When a model proposes an action that might require review—for example, writing to a file or executing SQL—the middleware can pause execution and wait for a decision."
+  },
+  "16": {
+    "source": "data/langchain-docs/oss/python/langchain/human-in-the-loop.md",
+    "quote": "the action can be approved as-is (`approve`), modified before running (`edit`), rejected with feedback (`reject`), or responded to directly (`respond`)"
+  },
+  "17": {
+    "source": "data/langchain-docs/oss/python/langchain/guardrails.md",
+    "quote": "Guardrails help you build safe, compliant AI applications by validating and filtering content at key points in your agent's execution."
+  },
+  "18": {
+    "source": "data/langchain-docs/oss/python/langchain/structured-output.md",
+    "quote": "Structured output allows agents to return data in a specific, predictable format."
+  },
+  "19": {
+    "source": "data/langchain-docs/oss/python/langchain/streaming.md",
+    "quote": "Streaming is crucial for enhancing the responsiveness of applications built on LLMs."
+  },
+  "20": {
+    "source": "data/langchain-docs/oss/python/langchain/multi-agent/index.md",
+    "quote": "Multi-agent systems coordinate specialized components to tackle complex workflows."
+  },
+  "21": {
+    "source": "data/langchain-docs/oss/python/langchain/multi-agent/index.md",
+    "quote": "A main agent coordinates subagents as tools. All routing passes through the main agent, which decides when and how to invoke each subagent."
+  },
+  "22": {
+    "source": "data/langchain-docs/oss/python/langgraph/workflows-agents.md",
+    "quote": "Workflows have predetermined code paths and are designed to operate in a certain order."
+  },
+  "23": {
+    "source": "data/langchain-docs/oss/python/langgraph/workflows-agents.md",
+    "quote": "Agents are dynamic and define their own processes and tool usage."
+  },
+  "24": {
+    "source": "data/langchain-docs/oss/python/langchain/mcp/index.md",
+    "quote": "infers the transport from the target you provide. The target is the only difference between an in-process server, a local script over stdio, and a remote URL"
+  },
+  "25": {
+    "source": "data/langchain-docs/oss/python/langchain/knowledge-base.md",
+    "quote": "Use it to retrieve passages similar to a query"
+  },
+  "26": {
+    "source": "data/langchain-docs/oss/python/langchain/observability.md",
+    "quote": "All LangChain agents automatically support LangSmith tracing."
+  }
+}

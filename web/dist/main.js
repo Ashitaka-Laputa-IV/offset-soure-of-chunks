@@ -1,4 +1,4 @@
-"use strict";
+import { loadSource, must, renderSource, shortPath, span } from "./source-view.js";
 const CHUNKS_URL = "../data/chunks/chunks.jsonl";
 const PREVIEW_CHARS = 100;
 const listEl = must("#list");
@@ -12,24 +12,8 @@ let query = "";
 let activeKey = "";
 let viewToken = 0;
 let filterTimer;
-const fileCache = new Map();
-function must(selector) {
-    const el = document.querySelector(selector);
-    if (!el)
-        throw new Error(`页面缺少元素 ${selector}`);
-    return el;
-}
-function span(className, text) {
-    const el = document.createElement("span");
-    el.className = className;
-    el.textContent = text;
-    return el;
-}
 function preview(text) {
     return text.replace(/\s+/g, " ").trim().slice(0, PREVIEW_CHARS);
-}
-function shortPath(source) {
-    return source.replace("data/langchain-docs/", "");
 }
 function isMatch(chunk, keyword) {
     if (!keyword)
@@ -38,13 +22,15 @@ function isMatch(chunk, keyword) {
         chunk.source.toLowerCase().includes(keyword) ||
         chunk.heading.toLowerCase().includes(keyword));
 }
+function chunkKey(chunk) {
+    return `${chunk.source}#${chunk.start}`;
+}
 function renderList() {
-    const keyword = query;
     const visible = [];
     const fragment = document.createDocumentFragment();
     for (let index = 0; index < chunks.length; index += 1) {
         const chunk = chunks[index];
-        if (!isMatch(chunk, keyword))
+        if (!isMatch(chunk, query))
             continue;
         visible.push(index);
         const item = document.createElement("button");
@@ -54,45 +40,13 @@ function renderList() {
         if (chunkKey(chunk) === activeKey)
             item.classList.add("active");
         const heading = chunk.heading ? ` › ${chunk.heading}` : "";
-        const meta = `${shortPath(chunk.source)} · 行 ${chunk.line_start}–${chunk.line_end}`;
-        item.append(span("idx", `[${visible.length}]`), span("text", preview(chunk.content)), span("meta", meta + heading));
+        const meta = `${shortPath(chunk.source)} · 行 ${chunk.line_start}–${chunk.line_end}${heading}`;
+        item.append(span("idx", `[${visible.length}]`), span("text", preview(chunk.content)), span("meta", meta));
         fragment.append(item);
     }
     listEl.replaceChildren(fragment);
-    const suffix = keyword ? `过滤后 ${visible.length} / ${chunks.length}` : `${chunks.length} chunks`;
+    const suffix = query ? `过滤后 ${visible.length} / ${chunks.length}` : `${chunks.length} chunks`;
     statsEl.textContent = `${suffix} · ${new Set(chunks.map((chunk) => chunk.source)).size} 个文件`;
-}
-function chunkKey(chunk) {
-    return `${chunk.source}#${chunk.start}`;
-}
-async function loadFile(source) {
-    const cached = fileCache.get(source);
-    if (cached)
-        return cached;
-    const response = await fetch(`../${source}`);
-    if (!response.ok)
-        throw new Error(`读取 ${source} 失败：${response.status}`);
-    const lines = (await response.text()).split("\n");
-    fileCache.set(source, lines);
-    return lines;
-}
-function renderSource(lines, chunk) {
-    const fragment = document.createDocumentFragment();
-    for (let index = 0; index < lines.length; index += 1) {
-        const lineNumber = index + 1;
-        const row = document.createElement("div");
-        row.className = "line";
-        if (lineNumber >= chunk.line_start && lineNumber <= chunk.line_end) {
-            row.classList.add("hit");
-            if (lineNumber === chunk.line_start)
-                row.classList.add("hit-start");
-        }
-        row.append(span("ln", String(lineNumber)), span("code", lines[index] === "" ? " " : lines[index]));
-        fragment.append(row);
-    }
-    sourceEl.replaceChildren(fragment);
-    const first = sourceEl.querySelector(".line.hit-start");
-    first?.scrollIntoView({ block: "center" });
 }
 async function openChunk(chunk) {
     const token = ++viewToken;
@@ -104,9 +58,9 @@ async function openChunk(chunk) {
     viewMetaEl.textContent = `字符 ${chunk.start}–${chunk.end} · 行 ${chunk.line_start}–${chunk.line_end} · ${chunk.chars} 字符`;
     sourceEl.replaceChildren(span("hint", "读取源文件…"));
     try {
-        const lines = await loadFile(chunk.source);
+        const lines = await loadSource(chunk.source);
         if (token === viewToken)
-            renderSource(lines, chunk);
+            renderSource(sourceEl, lines, chunk);
     }
     catch (error) {
         if (token === viewToken)
